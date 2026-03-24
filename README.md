@@ -98,6 +98,37 @@ Claude Code 用のパーソナル秘書プラグイン。
 - **デザイナー**: todos, projects, ideas, research, knowledge
 - **マネージャー**: todos, meetings, projects, knowledge
 
+## セットアップ後の出力例
+
+オンボーディング完了後に生成される `.secretary/` の実例を [`examples/.secretary/`](examples/.secretary/) で確認できます。
+
+```
+~/.secretary/
+├── CLAUDE.md           ← 秘書の設定・ユーザープロフィール
+├── inbox/              ← クイックキャプチャ
+│   ├── _template.md
+│   └── 2026-03-23.md
+├── reviews/            ← 週次・月次レビュー
+│   └── _template.md
+├── todos/              ← デイリータスク
+│   ├── _template.md
+│   └── 2026-03-23.md
+├── ideas/              ← アイデア記録
+│   └── _template.md
+├── research/           ← リサーチ・調査
+│   └── _template.md
+├── knowledge/          ← ナレッジベース
+│   └── _template.md
+├── finances/           ← 財務管理
+│   └── _template.md
+├── projects/           ← プロジェクト管理
+│   └── _template.md
+└── journal/            ← 日記・ジャーナル
+    └── _template.md
+```
+
+> 選択したカテゴリやロールによって構成は変わります。上記は一例です。
+
 ## ファイル構成
 
 ```
@@ -114,6 +145,8 @@ cc-secretary/
 │               └── references/
 │                   ├── templates.md  # カテゴリ別テンプレート集
 │                   └── claude-md-template.md
+├── examples/
+│   └── .secretary/                   # セットアップ出力のサンプル
 ├── README.md
 └── LICENSE
 ```
