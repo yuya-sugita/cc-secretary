@@ -1,59 +1,43 @@
 # cc-secretary
 
-Claude Code 用のパーソナル秘書プラグイン。
+個人ファンド運営のための管理リポジトリ。
 
-`/secretary` を実行すると、対話的にあなたの役割・日常・ニーズをヒアリングし、Markdownベースの管理フォルダを自動生成します。
+Claude Code の秘書プラグイン（`/secretary`）を中核に、日々のタスク管理・市場リサーチ・トレード記録・アイデア整理などをMarkdownベースで一元管理する。
 
-## インストール
-
-```
-/plugin marketplace add Shin-sibainu/cc-secretary
-/plugin install secretary@cc-secretary
-```
-
-## できること
-
-**初回セットアップ（オンボーディング）**
-- あなたの役割や日常をヒアリング
-- 管理したい領域を選択（TODO、アイデア、リサーチ、ナレッジなど）
-- ロールに最適化されたフォルダ構成を自動生成
-
-**日常の管理（管理モード）**
-- タスク追加・確認
-- アイデアやリサーチのクイック記録
-- inbox へのメモキャプチャ
-- 週次レビューの自動生成
-- ダッシュボードで全体俯瞰
-
-## 使い方の例
+## リポジトリ構成
 
 ```
-> /secretary
-
-秘書: あなたの主な役割や職業を教えてください！
-あなた: フリーランスのWebエンジニア
-
-秘書: 典型的な1日の流れを教えてください。
-あなた: 午前はコーディング、午後はクライアントMTG、夜にレビュー
-
-秘書: どの領域を管理したいですか？
-あなた: 1,2,3,7,11
-
-秘書: 以下のフォルダ構成を作成します...（ツリー表示）
-あなた: OK
-
-→ .secretary/ フォルダが自動生成される
+cc-secretary/
+├── .secretary/                       ← 秘書の管理データ（本体）
+│   ├── CLAUDE.md                     ← 秘書の設定・ルール
+│   ├── inbox/                        ← クイックキャプチャ
+│   ├── todos/                        ← デイリータスク
+│   ├── ideas/                        ← アイデア記録
+│   ├── research/                     ← 市場分析・銘柄調査
+│   ├── knowledge/                    ← ナレッジベース
+│   ├── finances/                     ← トレード収支・財務
+│   ├── projects/                     ← プロジェクト管理
+│   ├── journal/                      ← 日記・トレード心理記録
+│   └── reviews/                      ← 週次・月次レビュー
+├── plugins/
+│   └── secretary/                    ← Claude Code プラグイン定義
+│       ├── .claude-plugin/
+│       │   └── plugin.json
+│       └── skills/
+│           └── secretary/
+│               ├── SKILL.md
+│               └── references/
+├── .claude-plugin/
+│   └── marketplace.json
+├── README.md
+└── LICENSE
 ```
 
-セットアップ後は `/secretary` で管理モードに入り、日本語で操作できます:
+## 秘書（Secretary）
 
-```
-> /secretary
-秘書: 何をしますか？
-あなた: タスク追加 APIのエラーハンドリングを修正する
-```
+`/secretary` で起動する Claude Code プラグイン。初回はオンボーディングで対話的にセットアップし、以降は管理モードで日常操作を行う。
 
-## 管理モードのコマンド
+### コマンド一覧
 
 | コマンド | 動作 |
 |---------|------|
@@ -68,87 +52,25 @@ Claude Code 用のパーソナル秘書プラグイン。
 | カテゴリ追加 [名前] | 新しいカテゴリを追加 |
 | セットアップ確認 | 現在の秘書設定を一覧表示 |
 
-## 対応カテゴリ
+### 管理カテゴリ
 
-| カテゴリ | 説明 |
+| カテゴリ | 用途 |
 |---------|------|
 | todos | デイリータスク管理 |
 | ideas | アイデアの記録 |
-| research | リサーチ・調査 |
+| research | 市場分析・銘柄調査 |
 | knowledge | ナレッジベース |
-| content-plan | コンテンツ企画（ブログ/YouTube/SNS） |
-| meetings | 議事録 |
-| clients | クライアント管理 |
-| journal | 日記・ジャーナル |
-| reading-list | 読書リスト |
-| debugging | デバッグログ |
-| projects | プロジェクト管理 |
-| finances | 財務・経理 |
+| finances | トレード収支・財務管理 |
+| projects | プロジェクト管理（ファンド設立等） |
+| journal | 日記・トレード心理記録 |
 | inbox | クイックキャプチャ（常に含む） |
 | reviews | 週次・月次レビュー（常に含む） |
 
-## ロール別プリセット
-
-役割に応じて最適なカテゴリ構成を自動提案します:
-
-- **ソフトウェア開発者**: todos, projects, ideas, knowledge, debugging
-- **コンテンツクリエイター**: todos, content-plan, ideas, research
-- **学生・研究者**: todos, courses, research, knowledge, reading-list
-- **フリーランス**: todos, clients, projects, ideas, research
-- **デザイナー**: todos, projects, ideas, research, knowledge
-- **マネージャー**: todos, meetings, projects, knowledge
-
-## セットアップ後の出力例
-
-オンボーディング完了後に生成される `.secretary/` の実例を [`examples/.secretary/`](examples/.secretary/) で確認できます。
+## インストール
 
 ```
-~/.secretary/
-├── CLAUDE.md           ← 秘書の設定・ユーザープロフィール
-├── inbox/              ← クイックキャプチャ
-│   ├── _template.md
-│   └── 2026-03-23.md
-├── reviews/            ← 週次・月次レビュー
-│   └── _template.md
-├── todos/              ← デイリータスク
-│   ├── _template.md
-│   └── 2026-03-23.md
-├── ideas/              ← アイデア記録
-│   └── _template.md
-├── research/           ← リサーチ・調査
-│   └── _template.md
-├── knowledge/          ← ナレッジベース
-│   └── _template.md
-├── finances/           ← 財務管理
-│   └── _template.md
-├── projects/           ← プロジェクト管理
-│   └── _template.md
-└── journal/            ← 日記・ジャーナル
-    └── _template.md
-```
-
-> 選択したカテゴリやロールによって構成は変わります。上記は一例です。
-
-## ファイル構成
-
-```
-cc-secretary/
-├── .claude-plugin/
-│   └── marketplace.json              # マーケットプレイスカタログ
-├── plugins/
-│   └── secretary/
-│       ├── .claude-plugin/
-│       │   └── plugin.json           # プラグインマニフェスト
-│       └── skills/
-│           └── secretary/
-│               ├── SKILL.md          # メインスキル定義
-│               └── references/
-│                   ├── templates.md  # カテゴリ別テンプレート集
-│                   └── claude-md-template.md
-├── examples/
-│   └── .secretary/                   # セットアップ出力のサンプル
-├── README.md
-└── LICENSE
+/plugin marketplace add Shin-sibainu/cc-secretary
+/plugin install secretary@cc-secretary
 ```
 
 ## ライセンス

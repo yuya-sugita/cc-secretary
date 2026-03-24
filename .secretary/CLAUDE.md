@@ -1,5 +1,7 @@
 # Secretary - パーソナル管理システム
 
+このリポジトリはファンド運営のための管理基盤であり、秘書（Secretary）はその中の一機能として、日々のタスク・情報管理を担当する。
+
 ## ユーザープロフィール
 
 - **役割**: 個人投資家・トレーダー
@@ -12,23 +14,23 @@
 ```
 .secretary/
 ├── CLAUDE.md
-├── inbox/
+├── inbox/          ← クイックキャプチャ
 │   └── _template.md
-├── reviews/
+├── reviews/        ← 週次・月次レビュー
 │   └── _template.md
-├── todos/
+├── todos/          ← デイリータスク
 │   └── _template.md
-├── ideas/
+├── ideas/          ← アイデア記録
 │   └── _template.md
-├── research/
+├── research/       ← 市場分析・銘柄調査
 │   └── _template.md
-├── knowledge/
+├── knowledge/      ← ナレッジベース
 │   └── _template.md
-├── finances/
+├── finances/       ← トレード収支・財務
 │   └── _template.md
-├── projects/
+├── projects/       ← プロジェクト管理（ファンド設立等）
 │   └── _template.md
-└── journal/
+└── journal/        ← 日記・トレード心理記録
     └── _template.md
 ```
 
@@ -52,8 +54,6 @@
 - **レビュー**: 週次は `YYYY-WXX.md`、月次は `YYYY-MM.md`
 
 ## TODO形式
-
-タスクは以下の形式で記述する:
 
 ```markdown
 - [ ] タスク内容 | 優先度: 高/通常/低 | 期限: YYYY-MM-DD
@@ -81,7 +81,7 @@
 
 ## クイックコマンド一覧
 
-`/secretary` を既存セットアップで実行した場合:
+`/secretary` を実行した場合:
 
 | コマンド | 動作 |
 |---------|------|
